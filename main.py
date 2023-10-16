@@ -25,8 +25,8 @@ class Map:
             self.dots_count -= 1
         self.draw.rectangle([x, y, x + 1, y + 1], fill=color, width=0)
 
-    def save_map_image(self):
-        self.image.save('res.png')
+    def save_map_image(self, file_name):
+        self.image.save(file_name)
 
 
 class Ant:
@@ -56,16 +56,15 @@ class Ant:
             if route_map.map[self.y][self.x] == 0:
                 self.turn_right()
                 route_map.draw_dot(self.y, self.x, BLACK)
-                self.move_forward()
             else:
                 self.turn_left()
                 route_map.draw_dot(self.y, self.x, WHITE)
-                self.move_forward()
+            self.move_forward()
 
 
 if __name__ == '__main__':
     ant_map = Map(1024)
     ant = Ant(TOP, 511, 511)
     ant.go(ant_map)
-    ant_map.save_map_image()
+    ant_map.save_map_image('res.png')
     print(ant_map.dots_count)
